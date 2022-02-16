@@ -9,12 +9,20 @@
       <td><p>Cuisine: <%= @restaurant.category.capitalize %></p></td>
     </tr>
   </table>
+  <div class="container col-6">
+  <h4>Leave a review</h4>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating, collection: (0..5).to_a %>
+    <%= f.submit 'Submit review', class: "btn btn-primary" %>
+  <% end %>
+</div>
   <h4>Reviews</h4>
-  <% @reviews.each do |review| %>
+  <% @restaurant.reviews.each do |review| %>
     <p><%= review.content %></p></p>
     <p><%= review.rating %> / 5</p>
   <% end %>
   <br>
   <%= link_to "All restaurants", restaurants_path %>
-  <%= link_to "Leave a review", new_restaurant_review_path(@restaurant) %>
+  <%# <%= link_to "Leave a review", new_restaurant_review_path(@restaurant) %>
 </div>
